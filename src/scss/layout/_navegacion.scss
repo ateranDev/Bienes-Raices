@@ -1,20 +1,62 @@
 @use "base/mixins" as m;
 @use "base/variables" as v;
 
+.derecha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include m.tablet {
+    align-items: flex-end;
+  }
+
+  .dark-mode-boton {
+    width: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    filter: invert(100%);
+    &:hover {
+      cursor: pointer;
+    }
+    @include m.tablet {
+      margin-top: 0;
+    }
+  }
+}
+
 .barra {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-top: 3rem;
   @include m.tablet {
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
   }
 }
 
 .navegacion {
+  // Agrega el mismo efecto que display: none;... no se ve
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  transition:
+    visibility 0.4s ease-in-out,
+    opacity 0.7s linear,
+    height 0.5s linear;
+
+  &.mostrar {
+    // El mismo efecto que display: block;... se va a mostrar
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+  }
+
   @include m.tablet {
     display: flex;
     align-items: center;
+    opacity: 1;
+    visibility: visible;
   }
 
   a {
@@ -30,5 +72,17 @@
         margin-right: 0;
       }
     }
+  }
+}
+
+// Menu hamburguesa
+.mobile-menu {
+  @include m.tablet {
+    display: none;
+  }
+
+  img {
+    width: 5rem;
+    cursor: pointer;
   }
 }
